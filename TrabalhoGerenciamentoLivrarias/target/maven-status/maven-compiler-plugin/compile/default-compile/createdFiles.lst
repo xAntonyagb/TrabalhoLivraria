@@ -1,0 +1,15 @@
+br\unipar\trabalhogerenciamentolivrarias\model\Cidade.class
+br\unipar\trabalhogerenciamentolivrarias\model\Item.class
+br\unipar\trabalhogerenciamentolivrarias\model\Editora.class
+br\unipar\trabalhogerenciamentolivrarias\model\Estado.class
+br\unipar\trabalhogerenciamentolivrarias\model\FormaPagamento.class
+br\unipar\trabalhogerenciamentolivrarias\model\Autor.class
+br\unipar\trabalhogerenciamentolivrarias\model\Cliente.class
+br\unipar\trabalhogerenciamentolivrarias\model\PagamentoCredito.class
+br\unipar\trabalhogerenciamentolivrarias\model\PagamentoDinheiro.class
+br\unipar\trabalhogerenciamentolivrarias\model\Pais.class
+br\unipar\trabalhogerenciamentolivrarias\Main.class
+br\unipar\trabalhogerenciamentolivrarias\model\Endereco.class
+br\unipar\trabalhogerenciamentolivrarias\model\Venda.class
+br\unipar\trabalhogerenciamentolivrarias\model\Genero.class
+br\unipar\trabalhogerenciamentolivrarias\model\Livro.class
