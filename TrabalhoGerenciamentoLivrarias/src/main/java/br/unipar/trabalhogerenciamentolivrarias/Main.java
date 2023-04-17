@@ -200,8 +200,10 @@ public class Main {
                         JOptionPane.showInputDialog("Você pega o livro: '"+ livro +"' ("+ qtd +" qtd), olha para o cliente e diz que vai aplicar um desconto de (%):" )
                     )
                 );
-                double total = itens.get(i).calcularValorTotal();
+                double total = arredondar(itens.get(i).calcularValorTotal());
+                System.out.println(total);
                 itens.get(i).setValorTotal(total);
+                System.out.println(itens.get(i).getValorTotal());
                 JOptionPane.showMessageDialog(null, "Com desconto esse item totaliza: "+ total);
             }
             
@@ -330,8 +332,9 @@ public class Main {
                     }
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "O cliente te transefere: "+ valorRestante + " no pix.");
+                    novaVenda.addFormaPagamento(pix);
                     pix.setValorPago(valorRestante);
+                    JOptionPane.showMessageDialog(null, "O cliente te transefere: "+ valorRestante + " no pix.");
                 }
                 
             }
@@ -375,6 +378,7 @@ public class Main {
                     }
                 }
                 else{
+                    novaVenda.addFormaPagamento(pix);
                     JOptionPane.showMessageDialog(null, "O cliente te transefere: "+novaVenda.getValorTotal()+ " no pix.");
                     pix.setValorPago(novaVenda.getValorTotal());
                 }
@@ -384,10 +388,7 @@ public class Main {
             JOptionPane.showMessageDialog(null, novaVenda);
             System.out.println(novaVenda);
            
-            
-            
-            
-            
+
             
         String[] opcoes = {"Sim", "Não"};
         escolha = JOptionPane.showOptionDialog(null, "Deseja fechar a biblioteca por hoje?",
@@ -546,6 +547,10 @@ public class Main {
         
         listPaises.add(novoPais);
         return novoPais;
+    }
+    
+    private static double arredondar(double valor){
+       return Math.round(valor * 100.0) / 100.0;
     }
     
 }

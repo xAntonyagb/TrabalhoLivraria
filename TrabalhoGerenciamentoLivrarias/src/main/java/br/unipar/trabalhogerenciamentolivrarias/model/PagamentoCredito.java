@@ -25,7 +25,7 @@ public class PagamentoCredito extends FormaPagamento{
 
     @Override
     public String toString() {
-        return "PagamentoCredito{" + "numeroParcelas=" + numeroParcelas + '}';
+        return "Pagamento Credito{" + "numeroParcelas=" + numeroParcelas + ", descrição=" + super.getDescricao() + ", Valor pago=" + super.getValorPago() + '}';
     }
 
 }

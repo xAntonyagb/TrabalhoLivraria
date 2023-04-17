@@ -28,7 +28,10 @@ public class PagamentoDinheiro extends FormaPagamento{
     }
 
     public void calculoTroco(double valorPagar){
-        this.troco = this.notaEntregue - valorPagar;
+        double valor = this.notaEntregue - valorPagar;
+        valor = Math.round(valor * 100.0) / 100.0;
+                
+        this.troco = valor;
         this.setValorPago(valorPagar);
     }
     
@@ -48,8 +51,7 @@ public class PagamentoDinheiro extends FormaPagamento{
 
     @Override
     public String toString() {
-        return "PagamentoDinheiro{" + "notaEntregue:" + notaEntregue + ", troco=" + troco + '}';
+        return "Pagamento Dinheiro{" + "troco=" + troco + ", notaEntregue=" + notaEntregue + ", descrição=" + super.getDescricao() + ", Valor pago=" + super.getValorPago() + '}';
     }
-    
-    
+
 }
