@@ -66,6 +66,6 @@ public class Venda {
 
     @Override
     public String toString() {
-        return "Venda{ \nForma Pagamento{\n" + formaPagamento + "}\nItems{\n" + items + "\n}\n\nCliente: " + cliente + "\n Valor Total: " + valorTotal + "\n}";
+        return "Venda{ \nForma Pagamento{\n" + formaPagamento + "\n}\n\nItems{\n" + items + "\n}\n\nCliente: " + cliente + "\n Valor Total: " + valorTotal + "\n}";
     }
 }

@@ -51,7 +51,7 @@ public class PagamentoDinheiro extends FormaPagamento{
 
     @Override
     public String toString() {
-        return "Pagamento Dinheiro{" + "troco=" + troco + ", notaEntregue=" + notaEntregue + ", descrição=" + super.getDescricao() + ", Valor pago=" + super.getValorPago() + '}';
+        return "\nPagamento Dinheiro{" + "troco=" + troco + ", notaEntregue=" + notaEntregue + ", descrição=" + super.getDescricao() + ", Valor pago=" + super.getValorPago() + '}';
     }
 
 }

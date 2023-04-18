@@ -71,6 +71,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{"+ "Livro = " + livro + ", Qtd = " + qtd + ", Valor = " + livro.getPrecoVenda() + ", Desconto = " + calcularDescontoUnit()+ " (" + desconto+ " % )" + ", Valor total de venda do item = " + valorTotal + '}';
+        return "Item{"+ "\nLivro =" + livro + ",\nQtd = " + qtd + ",\n Valor = " + livro.getPrecoVenda() + ",\nDesconto = " + calcularDescontoUnit()+ " (" + desconto+ " % )" + ",\nValor total de venda do item = " + valorTotal + "}\n";
     }
 }

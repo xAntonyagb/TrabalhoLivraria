@@ -50,7 +50,7 @@ public class Autor {
 
     @Override
     public String toString() {
-        return "Autor{" + "nome=" + nome + ", Sexo=" + sexo + ", dataNascimento=" + dataNascimento + ", nacionalidade=" + nacionalidade + "}";
+        return "\nAutor{" + "nome=" + nome + ", Sexo=" + sexo + ", dataNascimento=" + dataNascimento + ", nacionalidade=" + nacionalidade + "}";
     }
 
     

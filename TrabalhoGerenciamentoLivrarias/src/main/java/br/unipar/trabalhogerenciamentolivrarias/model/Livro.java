@@ -98,8 +98,6 @@ public class Livro {
 
     @Override
     public String toString() {
-        return "Nome Livro: "+ nome + "\nAno de Lancamento: " + anoLancamento + "\nNumero de Paginas: " + numPaginas + "\nAutores: " + autores + "\n\nGeneros: " + generos + "\n\nEditora: " + editora + "\nQuantidade em Estoque: " + qtdEstoque + "\nPreço de Venda: " + precoVenda + '}';
+        return "Livro{" + "nome=" + nome + ", anoLancamento=" + anoLancamento + ", numPaginas=" + numPaginas + ", autores=" + autores + ",\ngeneros=" + generos + ",\neditora=" + editora + ",\nqtdEstoque=" + qtdEstoque + ",\nprecoVenda=" + precoVenda + "\n}";
     }
-    
-    
 }

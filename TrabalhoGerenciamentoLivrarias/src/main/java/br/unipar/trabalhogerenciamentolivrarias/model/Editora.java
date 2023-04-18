@@ -40,7 +40,7 @@ public class Editora {
 
     @Override
     public String toString() {
-        return "Editora{" + "nome=" + nome + ", endereco=" + endereco + ", telefone=" + telefone + '}';
+        return "Editora{" + "\nnome=" + nome + ",\nendereco=" + endereco + ",\ntelefone=" + telefone + "\n}";
     }
     
     

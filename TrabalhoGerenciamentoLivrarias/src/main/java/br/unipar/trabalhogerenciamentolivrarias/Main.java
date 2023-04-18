@@ -7,30 +7,31 @@ import br.unipar.trabalhogerenciamentolivrarias.model.*;
 public class Main {
 
     public static void main(String[] args) {
+        //Criando um país, estado e cidades
         Pais brasil = new Pais("Brasil", "BR");
         Estado parana = new Estado("Paraná", "PR", brasil);
-        
         Cidade toledo = new Cidade("Toledo", parana);
+        Cidade cascavel = new Cidade("Cascavel", parana);
+        
+        //Criando duas livrarias
         Endereco editoraLB = new Endereco("Rua da Editora", "Jardim Boa Vista", "3592", null, toledo);
         Editora livroBom = new Editora("livroBom", editoraLB, "988953733");
         
-
-        Cidade cascavel = new Cidade("Cascavel", parana);
         Endereco editoraLN = new Endereco("Rua da Edição", "Jardim Vista Diferente", "9812", "Perto do parque principal", cascavel);
         Editora livroNovo = new Editora("Livro Novo", editoraLN, "999361485");
         
-        
+        //Criando autores
         Autor robertoFG = new Autor("Roberto Frederico Gomes", "Masculino", "21/08/1986", brasil);
         Autor mariaTB = new Autor("Maria Tumberli Bisnaga", "Feminino", "08/03/1990", brasil);
         Autor larissaKS = new Autor("Larissa Katarina da Silva", "Feminino", "16/07/1982", brasil);
         
-        
+        //Criando generos de livros
         Genero horror = new Genero("Horror", "É assustador");
         Genero romance = new Genero("Romance", "Uma história de amor");
         Genero fc = new Genero("Ficção Cientifica", "Uma história imaginária ficcional");
         Genero humor = new Genero("Humor", "Uma história com humor engraçado");
         
-        
+        //Criando livros
         Livro cj = new Livro("As Cronicas de Juninho", 2020, 357, livroNovo, 7, 25.0);
         ArrayList<Autor> autoresCJ = new ArrayList<>();
         autoresCJ.add(mariaTB);
@@ -46,6 +47,7 @@ public class Main {
         ArrayList<Genero> generosMMC = new ArrayList<>();
         generosMMC.add(fc);
         generosMMC.add(horror);
+        mmc.setGeneros(generosMMC);
         mmc.addAutor(robertoFG);
         
         Livro aom = new Livro ("Um Amor de Outro Mundo", 2021, 336, livroNovo, 3, 13.0);
@@ -57,22 +59,24 @@ public class Main {
         aom.addGenero(fc);
         aom.addGenero(romance);
         
-        
+        //Criando endereços de clientes
         Endereco endMargarete = new Endereco("Rua Feliz", "Jardim Margarita", "5550", "apt 2", toledo);
         Endereco endJulia = new Endereco("Rua Divertida", "Jardim Celegial", "6284", "3 quadras da livraria", toledo);
         Endereco endIgor = new Endereco("Rua Legal", "Jardim Dois Vizinhos", "4880", null, toledo);
         
+        //Criando clientes
         Cliente margarete = new Cliente(endMargarete, "Margarete", "988562483");
         Cliente julia = new Cliente(endJulia, "Julia", "988195846");
         Cliente igor = new Cliente(endIgor, "Igor", "999648232");
         
-        
+        //Criando pagamentos
         PagamentoCredito credito = new PagamentoCredito("Cartão de Credito", "Pode ser pago em diversas parselas");
         PagamentoDinheiro dinheiro = new PagamentoDinheiro("Dinheiro", "Dinheiro a vista");
         FormaPagamento pix = new FormaPagamento("PIX", "Transação de dinheiro instantanea", true);
 
-        //Listas
         
+        
+        //Criando listas para agregar os objetos criados
         ArrayList<Cliente> clientes = new ArrayList<>();
         clientes.add(margarete);
         clientes.add(julia);
@@ -98,6 +102,7 @@ public class Main {
         formasDePagamento.add(credito);
         formasDePagamento.add(dinheiro);
         formasDePagamento.add(pix);
+        
         
         //Menus
         
@@ -140,7 +145,8 @@ public class Main {
                 }
 
                 String[] arrayNomes = nomes.toArray(new String[nomes.size()]);
-
+                
+                //Caso seja a primeira vez escolhendo livros, o cliente não tem a opção de dar continuidade a sua compra
                 if(primeiraVez){
                     String[] opcoes = new String[arrayNomes.length];
                     System.arraycopy(arrayNomes, 0, opcoes, 0, arrayNomes.length);
@@ -158,6 +164,8 @@ public class Main {
                     "O cliente se dirige até os livros",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoes, opcoes[0]);
                 }
+                
+                //Se o cliente não tiver escolhido dar continuidade ao precesso de compra, ele deve inserir a quantia que deseja comprar do livro
                 if(escolhaLivro != livros.size()){
                     int estoque = livros.get(escolhaLivro).getQtdEstoque();
                     
@@ -172,6 +180,8 @@ public class Main {
                                     JOptionPane.showInputDialog("Quantidade insuficiente, insira outra quantia (até "+ estoque + ") :"));
                         }
                     }
+                    
+                    //Adição do livro como um item de compra
                     Item novoItem = new Item(qtd, livros.get(escolhaLivro));
                         
                     itens.add(novoItem);
@@ -180,6 +190,7 @@ public class Main {
                primeiraVez = false;
             };
             
+            //Printar os livros escolhidos
             String itensString = "";
             for(int i = 0; i < itens.size(); i++){
                 itensString += "Livro: " + itens.get(i).getLivro().getNome() + " - Qtd: " + itens.get(i).getQtd() + "\n";
@@ -188,7 +199,6 @@ public class Main {
             
             
             //Dar desconto
-            
             JOptionPane.showMessageDialog(null, "O cliente vai até o caixa da livraria. Lá ele se depara com você, Anderson, e lhe pede um desconto..");
             
             for(int i = 0; i < itens.size(); i++){
@@ -201,9 +211,7 @@ public class Main {
                     )
                 );
                 double total = arredondar(itens.get(i).calcularValorTotal());
-                System.out.println(total);
                 itens.get(i).setValorTotal(total);
-                System.out.println(itens.get(i).getValorTotal());
                 JOptionPane.showMessageDialog(null, "Com desconto esse item totaliza: "+ total);
             }
             
@@ -214,8 +222,10 @@ public class Main {
             novaVenda.setItems(itens);
             novaVenda.setValorTotal(novaVenda.calcularValorTotal());
             
+            
             //Pagamento
             
+            //Converter as formas de pagamento em opções
             ArrayList<String> nomes = new ArrayList<>();
             for(int x = 0; x < formasDePagamento.size(); x++){
                 nomes.add(formasDePagamento.get(x).getNome());
@@ -231,23 +241,23 @@ public class Main {
             JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, pagamento, pagamento[pagamento.length - 1]);
             
             
-            //Dois pagamentos
+            //Caso o usuário escolha dois pagamentos
             
             if(escolhaPagamento == pagamento.length-1){
                 pagamento = new String[arrayNomes.length];
                 System.arraycopy(arrayNomes, 0, pagamento, 0, arrayNomes.length);
                 
-                //primeiro pagamento
+                //Escolher primeiro pagamento
                 int primeiroPagamento = JOptionPane.showOptionDialog(null, "Pagar primeiramente com qual forma:", "Primeiro pagamento",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, pagamento, pagamento[0]);
                 
-                //Credito
+                //Se for credito
                 if(primeiroPagamento == 0){
                     novaVenda.addFormaPagamento(credito);
                     credito.setValorPago( Double.parseDouble(JOptionPane.showInputDialog("Quanto deseja pagar com esse meio (Necessario: "+ novaVenda.getValorTotal() +"):")) );
                     credito.setNumeroParcelas( Integer.parseInt(JOptionPane.showInputDialog("Em quantas parcelas deseja fazer:")) );
                 }
-                //Dinheiro
+                //Se for dinheiro
                 else if(primeiroPagamento == 1){
                     
                     novaVenda.addFormaPagamento(dinheiro);
@@ -260,7 +270,7 @@ public class Main {
                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesNota, opcoesNota[0]);
                     double notaD = Double.parseDouble(opcoesNota[nota]);
                     
-                    
+                    //Caso a nota dada não dizer respeito com o valor que o cliente deveria pagar, ele deve dar uma quantia válida
                     while(vaiPagar > notaD){
                         nota = JOptionPane.showOptionDialog(null, "A nota dada não cumpre com o valor sugerido pelo cliente, você explica para o cliente e pede uma quantia válida (" + vaiPagar +"):",
                         "Pagar corretamente",
@@ -278,30 +288,42 @@ public class Main {
                         JOptionPane.showMessageDialog(null, "Você extende a mão para o cliente e diz: 'Aqui seu troco', e lhe entrega R$ "+ dinheiro.getTroco());
                     }
                 }
+                //Se for pix
                 else{
                     novaVenda.addFormaPagamento(pix);
                     pix.setValorPago( Double.parseDouble(JOptionPane.showInputDialog("Quanto deseja pagar com esse meio (Necessario: "+ novaVenda.getValorTotal() +"):")) );
                 }
                 
-                
-                
-                
-                
+
+                //Segundo pagamento
                 
                 double ultimoValorPago = novaVenda.getFormaPagamento().get(0).getValorPago();
                 double valorRestante = novaVenda.getValorTotal() - ultimoValorPago;
+
+                //Bloquear o uso da mesma forma de pagamento
+                int escolhaInvalida = -1;
+                for(int x = 0; x < formasDePagamento.size(); x++){
+                    if(x == primeiroPagamento)
+                        escolhaInvalida = x;
+                }
                 
-                //Segundo pagamento
-                int segundoPagamento = JOptionPane.showOptionDialog(null, "Com qual pagamento deseja pagar os "+ valorRestante +" restantes:", "Segundo pagamento",
+                int segundoPagamento;
+                do{
+                    segundoPagamento = JOptionPane.showOptionDialog(null, "Com qual pagamento deseja pagar os "+ valorRestante +" restantes:", "Segundo pagamento",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, pagamento, pagamento[0]);
-
-
-                //Credito
+                    
+                    if(segundoPagamento == escolhaInvalida)
+                        JOptionPane.showMessageDialog(null, "Essa opção de pagamento já foi usada antes, porfavor utilize outra...");
+                }while(segundoPagamento == escolhaInvalida);
+                
+                
+                //Se for credito
                 if(segundoPagamento == 0){
                     novaVenda.addFormaPagamento(credito);
                     credito.setNumeroParcelas( Integer.parseInt(JOptionPane.showInputDialog("Em quantas parcelas deseja fazer:")) );
+                    credito.setValorPago(valorRestante);
                 }
-                //Dinheiro
+                //Se for dinheiro
                 else if(segundoPagamento == 1){
                     novaVenda.addFormaPagamento(dinheiro);
 
@@ -313,7 +335,7 @@ public class Main {
                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesNota, opcoesNota[0]);
                     double notaD = Double.parseDouble(opcoesNota[nota]);
 
-
+                    //Caso a nota dada não dizer respeito com o valor que o cliente deveria pagar, ele deve dar uma quantia válida
                     while(valorRestante > notaD){
                         nota = JOptionPane.showOptionDialog(null, "A nota dada não cumpre com o valor necessário, você explica para o cliente e pede uma quantia válida (" + valorRestante +"):",
                         "Pagar corretamente",
@@ -331,6 +353,7 @@ public class Main {
                         JOptionPane.showMessageDialog(null, "Você extende a mão para o cliente e diz: 'Aqui seu troco', e lhe entrega R$ "+ dinheiro.getTroco());
                     }
                 }
+                //Se for pix
                 else{
                     novaVenda.addFormaPagamento(pix);
                     pix.setValorPago(valorRestante);
@@ -341,13 +364,13 @@ public class Main {
             
             //Um pagamento
             else{
-                //Credito
+                //Se for credito
                 if(escolhaPagamento == 0){
                     novaVenda.addFormaPagamento(credito);
-                    credito.setValorPago( novaVenda.getValorTotal());
+                    credito.setValorPago(novaVenda.getValorTotal());
                     credito.setNumeroParcelas( Integer.parseInt(JOptionPane.showInputDialog("Em quantas parcelas deseja fazer:")) );
                 }
-                //Dinheiro
+                //Se for dinheiro
                 else if(escolhaPagamento == 1){
                     
                     novaVenda.addFormaPagamento(dinheiro);
@@ -359,7 +382,7 @@ public class Main {
                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesNota, opcoesNota[0]);
                     double notaD = Double.parseDouble(opcoesNota[nota]);
                     
-                    
+                    //Caso a nota dada não dizer respeito com o valor que o cliente deveria pagar, ele deve dar uma quantia válida
                     while(novaVenda.getValorTotal() > notaD){
                         nota = JOptionPane.showOptionDialog(null, "A nota dada não cumpre com o valor sugerido pelo cliente, você explica para o cliente e pede uma quantia válida (" + novaVenda.getValorTotal() +"):",
                         "Pagar corretamente",
@@ -377,6 +400,7 @@ public class Main {
                         JOptionPane.showMessageDialog(null, "Você extende a mão para o cliente e diz: 'Aqui seu troco', e lhe entrega R$ "+ dinheiro.getTroco());
                     }
                 }
+                //Se for pix
                 else{
                     novaVenda.addFormaPagamento(pix);
                     JOptionPane.showMessageDialog(null, "O cliente te transefere: "+novaVenda.getValorTotal()+ " no pix.");
@@ -389,7 +413,7 @@ public class Main {
             System.out.println(novaVenda);
            
 
-            
+        //Escolher se deseja manter o sistema online ou não, caso sim, um novo cliente chega a loja para fazer uma compra
         String[] opcoes = {"Sim", "Não"};
         escolha = JOptionPane.showOptionDialog(null, "Deseja fechar a biblioteca por hoje?",
             "Terminar o dia",
@@ -398,6 +422,7 @@ public class Main {
     }
     
     
+    //Metodos para retornar um array de Strings dos conteudos de uma ArrayList (Só pra não deixar com poluição no código)
     private static String[] listClienteToArrayNomes (ArrayList<Cliente> transformar, String primeiraOpcao){
         ArrayList<String> nomes = new ArrayList<>();
         for(int x =0; x < transformar.size(); x++){
@@ -457,18 +482,19 @@ public class Main {
         
         return opcoes;
     }
-
+    
+    //Metodos para cadastrar/atualizar um endereço
     private static void cadastrarCliente(ArrayList<Cliente> clientes, ArrayList<Cidade> listCidade, ArrayList<Estado> listEstados, ArrayList<Pais> listPaises){
         clientes.add(new Cliente(
         cadastrarEndereco(listCidade, listEstados, listPaises),
-        JOptionPane.showInputDialog("Qual seu nome:"),
-        JOptionPane.showInputDialog("Insira seu número de telefone:")
+        JOptionPane.showInputDialog("Qual o nome do cliente:"),
+        JOptionPane.showInputDialog("Insira o número de telefone:")
         ));
     }
     
     private static Endereco cadastrarEndereco(ArrayList<Cidade> listCidade, ArrayList<Estado> listEstados, ArrayList<Pais> listPaises){
-        String rua = JOptionPane.showInputDialog("Insira sua Rua:");
-        String bairro = JOptionPane.showInputDialog("Insira seu Bairro:");
+        String rua = JOptionPane.showInputDialog("Insira a Rua:");
+        String bairro = JOptionPane.showInputDialog("Insira o Bairro:");
         
         String complemento;
         String[] opcoes = {"Sim", "Não"};
@@ -493,7 +519,7 @@ public class Main {
     
     private static Cidade inserirCidade(ArrayList<Cidade> listCidades, ArrayList<Estado> listEstados, ArrayList<Pais> listPaises){
         int temCidade = JOptionPane.showOptionDialog(null, "Cidade",
-                "Selecione sua cidade",
+                "Selecione a cidade",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, listCidadeToArrayNomes(listCidades, "Outra"), null);
         if(temCidade == 0)
             return cadastrarCidade(listCidades, listEstados, listPaises);
@@ -512,7 +538,7 @@ public class Main {
     
     private static Estado inserirEstado(ArrayList<Estado> listEstados, ArrayList<Pais> listPaises){
         int temEstado = JOptionPane.showOptionDialog(null, "Estado",
-                "Selecione seu Estado",
+                "Selecione o Estado",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, listEstadoToArrayNomes(listEstados, "Outro"), null);
         if(temEstado == 0)
             return cadastrarEstado(listEstados, listPaises);
@@ -532,7 +558,7 @@ public class Main {
     
     private static Pais inserirPais(ArrayList<Pais> listPaises){
         int temPais = JOptionPane.showOptionDialog(null, "País",
-                "Selecione seu País",
+                "Selecione o País",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, listPaisToArrayNomes(listPaises, "Outro"), null);
         if(temPais == 0)
             return cadastrarPais(listPaises);
@@ -549,6 +575,7 @@ public class Main {
         return novoPais;
     }
     
+    //Metodo para arredondar 
     private static double arredondar(double valor){
        return Math.round(valor * 100.0) / 100.0;
     }
